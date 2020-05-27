@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LydTest</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+
+        #ramme{
+           width: 500px;
+           height: 500px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           flex-direction: column;
+           border: 2px solid darkmagenta;
+           background-color: pink;
+        }
+        button{
+            
+            margin: 10px;
+            z-index: 1;
+        }
+
+        .heart{
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: red;
+            height: 175px;
+            width: 175px;
+            transform: rotate(225deg);
+            z-index: 0;
+            
+        }
+       
+
+        .heart::after{
+            background-color: red;
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            height: 175px;
+            width: 175px;
+            top: 0;
+            left: 87.5px;
+        }
+        .heart::before  {
+            background-color: red;
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            height: 175px;
+            width: 175px;
+            top: 87.5px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart"></div>
+    <div id="ramme"></div>
+    <script>
+   
+        let ramme = document.querySelector("#ramme");
+        let lyder = [
+            {
+                Navn: "Hey bby",
+                Lyd: "HeyBby.mp3"
+            },
+            {
+                Navn: "Veldig glad i deg bby",
+                Lyd: "VeldigGlad.mp3"
+            },
+            {
+                Navn: "Savner deg masse, <br> bye bye",
+                Lyd: "SavnerDeg.mp3"
+            }
+        ];
+
+            let lydAvspilling  = new Audio();
+            console.log(lydAvspilling.src); 
+                       
+
+        for (let i = 0; i < lyder.length; i++) {
+            
+            ramme.innerHTML += `<button id="${i}">${lyder[i].Navn}</button>`
+            let buttons = document.querySelectorAll("button");
+            for (let j = 0; j < buttons.length; j++) {
+                buttons[j].addEventListener("click", spillLyd)
+            }
+        }
+
+        function spillLyd(event){
+            let valgtKnapp = event.target.id;
+            console.log(valgtKnapp);
+
+            console.log("KJØRER")
+            
+            let buttons = document.querySelectorAll("button");
+            lydAvspilling.src = lyder[valgtKnapp].Lyd;  
+            
+
+            lydAvspilling.play(); 
+
+            console.log(lydAvspilling.src);   
+        
+        }
+
+
+     
+
+
+
+
+    </script>
+</body>
+</html>
