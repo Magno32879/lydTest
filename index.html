@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BbyLydTest</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            }
+        #ramme{
+           width: 500px;
+           height: 500px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           flex-direction: column;
+           border: 2px solid darkmagenta;
+           background-color: pink;
+        }
+        button{   
+            margin: 10px;
+            z-index: 1;
+        }
+        .heart{
+            position: absolute;
+            margin: auto;
+            top: 150px;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: red;
+            height: 175px;
+            width: 175px;
+            transform: rotate(225deg);
+            z-index: 0;    
+            transition: all 2s ease-in-out; 
+        }
+        .heart::after{
+            background-color: red;
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            height: 175px;
+            width: 175px;
+            top: 0;
+            left: 87.5px;
+        }
+        .heart::before  {
+            background-color: red;
+            content: "";
+            border-radius: 50%;
+            position: absolute;
+            height: 175px;
+            width: 175px;
+            top: 87.5px;
+            left: 0;
+        }
+      h1{
+          z-index: 4;   
+      }
+      .snurr{
+          transform: rotate(360deg), scale(2);
+      }
+    </style>
+</head>
+<body>
+    <h1>Til bby<3</h1>
+    <div id="ramme">
+        <div class="heart" id="hjerte"></div>
+    </div>
+    <script>
+        let ramme = document.querySelector("#ramme");
+        let heart = document.querySelector("#hjerte")
+        let lyder = [
+            {
+                Navn: "Prøvde bare",
+                Lyd: "HeyBby.mp3"
+            },
+            {
+                Navn: "å være",
+                Lyd: "VeldigGlad.mp3"
+            },
+            {
+                Navn: "søt",
+                Lyd: "SavnerDeg.mp3"
+            }
+        ];
+            let lydAvspilling  = new Audio();
+            console.log(lydAvspilling.src);              
+
+        for (let i = 0; i < lyder.length; i++) {
+            
+            ramme.innerHTML += `<button id="${i}">${lyder[i].Navn}</button>`
+            let buttons = document.querySelectorAll("button");
+            for (let j = 0; j < buttons.length; j++) {
+                buttons[j].addEventListener("click", spillLyd)
+            }
+        }
+
+        function spillLyd(event){
+            let valgtKnapp = event.target.id;
+            console.log(valgtKnapp);
+            console.log("KJØRER")
+            let buttons = document.querySelectorAll("button");
+            lydAvspilling.src = lyder[valgtKnapp].Lyd;  
+
+            lydAvspilling.play(); 
+
+           heart.animate([
+                {
+                    transform: "rotate(0)"
+                },
+                {
+                    transform: "rotate(360deg)"
+                }
+                ], 
+                {
+                    duration: 1000
+                }
+            )
+            console.log(lydAvspilling.src);  
+        }
+    </script>
+</body>
+</html>
